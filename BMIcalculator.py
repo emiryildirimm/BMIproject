@@ -4,12 +4,27 @@ from tkinter import messagebox
 root = Tk()
 user_gender = IntVar()
 
+global value
+
 
 def button_click():
+    global value
     user_weight_value= int(user_weight.get())
     user_height_value = float(user_height.get())**2
     value = user_weight_value / user_height_value
-    messagebox.showinfo("BMI",f"Your BMI :{value} " )
+
+
+    if value < 18.5:
+        messagebox.showinfo("BMI", f"Your BMI :{value} - Underweight ")
+    elif 18.5 < value < 24.9:
+        messagebox.showinfo("BMI", f"Your BMI :{value} - Normal ")
+    elif 25 < value <29.9:
+        messagebox.showinfo("BMI", f"Your BMI :{value} - Overweight ")
+    elif 30 < value < 34.9:
+        messagebox.showinfo("BMI", f"Your BMI :{value} - Obese ")
+    else:
+        messagebox.showinfo("BMI", f"Your BMI :{value} - Extremely Obese ")
+
 
 
 root.title("BMI Calculator")
@@ -51,10 +66,10 @@ user_height_label = Label(text="Enter your height(m): ")
 user_height_label.pack()
 user_height_label.place(x=5, y=160)
 
-
 button = Button(root, text="Calculate",activebackground="blue", activeforeground="white", command=button_click)
 button.pack()
 button.place(x=195, y=210)
+
 
 
 root.mainloop()
